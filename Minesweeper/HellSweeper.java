@@ -1,7 +1,7 @@
 import java.lang.Math.*;
 import java.util.Scanner;
 /**
- * Mine Sweeper but every click you die
+ * Minesweeper but every click you die
  */
 public class HellSweeper
 {
@@ -11,7 +11,7 @@ public class HellSweeper
     /**
      * Constructor for objects of class HellSweeper
      */
-    public static void main()
+    public static void main(String[] args)
     {
         for (int i = 0; i < 5; i++)
         {
@@ -37,8 +37,9 @@ public class HellSweeper
             Scanner c = new Scanner(System.in);
             System.out.println("Enter column number: ");
             int col = c.nextInt();
-
-            if(board[row][col] == 1)
+	    
+	    	    
+            if(board[row-1][col-1] == 1)
             {
                 System.out.println("Game over. Welcome to Hellsweeper, the game with literally no strategy or skill.");
                 printRealBoard();
@@ -46,8 +47,9 @@ public class HellSweeper
             }
             else
             {
-                safe -= 1;
-                visableBoard[row][col] = "0";
+		showNearby(row, col);
+		safe -= 1;
+                visableBoard[row-1][col-1] = Integer.toString(showNearby(row, col));
                 System.out.println("You're not dead yet.");
                 printBoard();
                 if(safe <= 0)
@@ -79,5 +81,46 @@ public class HellSweeper
             }
             System.out.println();
         }
+    }
+    public static int showNearby(int row, int col)
+    {
+	int nearbyMines = 0;
+	if (board[row-2][col-2] == 1)
+	{
+	    nearbyMines += 1;
+	}
+	if (board[row-1][col-2] == 1)
+	{
+	    nearbyMines += 1;
+	}
+	if (board[row][col-2] == 1)
+        {
+	    nearbyMines += 1;         
+	}
+	if (board[row-2][col-2] == 1)
+	{
+	    nearbyMines += 1;
+	}
+	if (board[row][col-1] == 1)
+	{
+	    nearbyMines += 1;
+	}
+	if (board[row-2][col] == 1)
+	{
+	    nearbyMines += 1;
+	}
+	if (board[row-1][col] == 1)
+	{
+	    nearbyMines += 1;
+	}
+	if (board[row][col] == 1)
+	{
+	    nearbyMines += 1;
+	}
+	
+	if (nearbyMines == 0) {
+	    return 0;
+	}
+	return 0;
     }
 }
