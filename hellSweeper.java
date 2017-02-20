@@ -1,23 +1,25 @@
 import java.lang.Math.*;
 import java.util.Scanner;
+
 /**
  * Title: Minesweeper 
  * Description: A game where you try to avoid mines.
  * Authors: Tamir Enkjargle, Dane Miller, Otakar Andrysek
  * Date: 2/13/17
  */
+
 public class HellSweeper
 {
     // Initialize board (this is a 5x5 board, two extra rows and column are added for padding)
+            // NEW: The board can now be any size.
     static int[][] board = new int[7][7];
     // The board that the user sees
-    static String[][] visableBoard = new String[5][5];
-    
-    // ??
+    static String[][] visableBoard = new String[board.length - 2][board.length - 2];
+    // The number of mines left on the board
     static int safeSpots = 0;
+    
     /**
-     * Constructor for objects of class HellSweeper
-     * TODO: Move this code out of constructor (it's not supposed to be here I think)
+     * This method is the main game run code
      */
     public static void main(String[] args)
     {
@@ -43,14 +45,12 @@ public class HellSweeper
                 visableBoard[i-1][j-1] = "x";
             }
         }
-        // Print the board right off the bat
-        printBoard();
-        printRealBoard();
         
         // The main game loop
         boolean playing = true;
         while (playing == true)
         {
+            printBoard();
             Scanner r = new Scanner(System.in);
             System.out.println("Enter row number: ");
             int row = r.nextInt();
@@ -59,12 +59,14 @@ public class HellSweeper
             System.out.println("Enter column number: ");
             int col = c.nextInt();
         
+            // RIP, landed on mine
             if (board[row][col] == 1)
             {
                 System.out.println("Game over. Welcome to Hellsweeper, the game with literally no strategy or skill.");
                 printRealBoard();
                 playing = false;
             }
+            // Looks like they got lucky
             else
             {
                 showNearby(row, col);
@@ -72,6 +74,7 @@ public class HellSweeper
                 visableBoard[row-1][col-1] = Integer.toString(showNearby(row, col));
                 System.out.println("You're not dead yet.");
                 printBoard();
+                // Maybe there are no more mines left?
                 if(safeSpots <= 0)
                 {
                     System.out.println("WINNER WINNER MAD LUCK SUPER CHEATS ALERT");
@@ -81,6 +84,10 @@ public class HellSweeper
         }
     }
     
+    /**
+     * This method prints the hidden board as an (n*m) matrix
+     * NOTE: No current application except for testing
+     */
     public static void printRealBoard()
     {
         for (int i = 0; i < board.length - 1; i++)
@@ -93,6 +100,9 @@ public class HellSweeper
         }
     }
     
+    /**
+     * This method prints the game board as an (n*m) matrix
+     */
     public static void printBoard()
     {
         for (int i = 0; i < visableBoard.length - 1; i++)
@@ -105,6 +115,9 @@ public class HellSweeper
         }
     }
     
+    /**
+     * This method check nearby spots for mines and returns the number of mines in the nearby 3x3 area
+     */
     public static int showNearby(int row, int col)
     {
         int nearbyMines = 0;
@@ -129,7 +142,6 @@ public class HellSweeper
         {
             nearbyMines += 1;
         }
-        
         // Check the top side
         if (board[row + 1][col] == 1)
         {
