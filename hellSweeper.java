@@ -50,16 +50,18 @@ public class HellSweeper
         boolean playing = true;
         while (playing == true)
         {
+            // Print the baord to the user
             printBoard();
-            Scanner r = new Scanner(System.in);
+            
+            // Scan for row
             System.out.println("Enter row number: ");
-            int row = r.nextInt();
+            int row = getInput();
 
-            Scanner c = new Scanner(System.in);
+            // Scan for column
             System.out.println("Enter column number: ");
-            int col = c.nextInt();
+            int col = getInput();
         
-            // RIP, landed on mine
+            // RIP, the user landed on a mine
             if (board[row][col] == 1)
             {
                 System.out.println("Game over. Welcome to Hellsweeper, the game with literally no strategy or skill.");
@@ -73,7 +75,6 @@ public class HellSweeper
                 safeSpots -= 1;
                 visableBoard[row-1][col-1] = Integer.toString(showNearby(row, col));
                 System.out.println("You're not dead yet.");
-                printBoard();
                 // Maybe there are no more mines left?
                 if(safeSpots <= 0)
                 {
@@ -84,6 +85,17 @@ public class HellSweeper
         }
     }
     
+    /**
+     * This method gets user input
+     */
+    public static int getInput()
+    {
+        Scanner reader = new Scanner(System.in);  
+        int input = reader.nextInt();   // Scans the input as an int
+        reader.close();
+        return input;
+    }
+
     /**
      * This method prints the hidden board as an (n*m) matrix
      * NOTE: No current application except for testing
