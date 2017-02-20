@@ -108,41 +108,49 @@ public class HellSweeper
     public static int showNearby(int row, int col)
     {
         int nearbyMines = 0;
+        
+        // Check the top - left corner
+        if (board[row + 1][col - 1] == 1)
+        {
+            nearbyMines += 1;
+        }
+        // Check the top - right corner
+        if (board[row + 1][col + 1] == 1)
+        {
+            nearbyMines += 1;
+        }
+        // Check the bottom - left corner
         if (board[row - 1][col - 1] == 1)
         {
             nearbyMines += 1;
         }
+        // Check the bottom - right corner
+        if (board[row - 1][col + 1] == 1)
+        {
+            nearbyMines += 1;
+        }
+        
+        // Check the top side
+        if (board[row + 1][col] == 1)
+        {
+            nearbyMines += 1;
+        }
+        // Check the bottom side
+        if (board[row - 1][col] == 1)
+        {
+            nearbyMines += 1;
+        }
+        // Check the left side
         if (board[row][col - 1] == 1)
         {
             nearbyMines += 1;
         }
-        if (board[row][col-2] == 1)
-        {
-            nearbyMines += 1;         
-        }
-        if (board[row-2][col-2] == 1)
+        // Check the right side
+        if (board[row][col + 1] == 1)
         {
             nearbyMines += 1;
         }
-        if (board[row][col-1] == 1)
-        {
-            nearbyMines += 1;
-        }
-        if (board[row-2][col] == 1)
-        {
-            nearbyMines += 1;
-        }
-        if (board[row-1][col] == 1)
-        {
-            nearbyMines += 1;
-        }
-        if (board[row][col] == 1)
-        {
-            nearbyMines += 1;
-        }
-        if (nearbyMines == 0) {
-            return 0;
-        }
-        return 0;
+
+        return nearbyMines;
     }
 }
