@@ -1,3 +1,4 @@
+# Compiled Code
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -8,8 +9,11 @@
 *.war
 *.ear
 
-# Virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# Virtual machine crash logs
 hs_err_pid*
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 
 # BlueJ
 **/doc
@@ -19,3 +23,5 @@ hs_err_pid*
 
 # OS Data Files
 .DS_Store
+
+# Extra
