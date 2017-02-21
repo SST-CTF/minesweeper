@@ -4,6 +4,6 @@
 A game of minesweeper coded in Java for CSA
 
 ##### Credit
-- Tamir Enkjarglidn
+- Tamir Enkjargal
 - Dane Miller
 - Otakar Andrysek
